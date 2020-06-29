@@ -1,0 +1,33 @@
+<div class="container main-container">
+  <div class="text-center">
+    <div style="align-content:center;">
+        <img src="/assets/{{ produto.imagem }}" height="164px" width="253px" alt="">
+    </div>
+    <br>
+    <h4>{{ produto.nome | titlecase }}</h4>
+    <br>
+
+    <div [ngSwitch]="produto.promocao">
+        <p *ngSwitchCase="true">Promoção!</p>
+        <p *ngSwitchCase="false">Por apenas:</p>
+    </div>
+    <br>
+
+    <div *ngIf="produto.promocao">
+      <div>
+        <h4>De:
+          <small><del>{{ produto.valor | currency:'BRL':true:'1.2-2':'pt' }}</del></small>
+          Por: {{ produto.valorPromocao | currency:'BRL':true:'1.2-2':'pt' }}
+        </h4>
+      </div>
+    </div>
+
+    <div *ngIf="!produto.promocao">
+        <div><h4>{{ produto.valor | currency:'BRL':true:'1.2-2':'pt' }}</h4></div>
+    </div>
+
+    <br>
+
+    <a class="btn btn-primary" [routerLink]="['/produtos']">Voltar</a>
+  </div>
+</div>
